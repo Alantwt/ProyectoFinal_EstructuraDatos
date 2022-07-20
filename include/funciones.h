@@ -1,6 +1,10 @@
 #ifndef _FUNCIONES
 #define _FUNCIONES
 
+#ifndef UNICODE
+#define UNICODE//Esto es para utilizar caracteres latinos mas facil
+#endif
+
 //LINRERIAS INCLUIDAS
 #include <iostream>
 #include <stdlib.h>

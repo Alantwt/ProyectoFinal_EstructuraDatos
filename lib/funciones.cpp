@@ -6,7 +6,7 @@ void BinaryTreeGenerate(int* sequence, int lenSequence, char* option){
     for(int i = 0; i <= lenSequence-1; i++){
         cout<<*(sequence+i)<<endl;
     }
-    
+
     if(strcmp(option,"preorder")){
         void preorder();
     }
