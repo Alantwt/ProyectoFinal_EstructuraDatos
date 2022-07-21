@@ -1,6 +1,6 @@
 #include "../include/funciones.h"
 
-void BinaryTreeGenerate(int* sequence, int lenSequence, char* option){
+void BinaryTreeGenerate(int** sequence, int lenSequence, char* option){
     cout<<"hellor world"<<endl;
     cout<<option<<endl;
     for(int i = 0; i <= lenSequence-1; i++){
@@ -18,6 +18,6 @@ void BinaryTreeGenerate(int* sequence, int lenSequence, char* option){
     }
 }
 
-int BinaryTreeSrchHeightOf(BinaryTree* bTree, int element, int BinaryTreeHeight){
+int BinaryTreeSrchHeightOf(BinaryTree* bTree, int element){
 
 }

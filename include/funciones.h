@@ -18,8 +18,8 @@ struct BinaryTree {
 };
 
 //DECLARACIONES
-void BinaryTreeGenerate(int* sequence, int lenSequence, char* option);
-int BinaryTreeSrchHeightOf(int element, int BinaryTreeHeight);
+void BinaryTreeGenerate(int** sequence, int lenSequence, char* option);
+int BinaryTreeSrchHeightOf(int element);
 
 //ARBOL BINARIO
 BinaryTree* arbolBinario;

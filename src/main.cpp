@@ -29,7 +29,7 @@ int WINAPI WinMain (HINSTANCE hThisInstance,HINSTANCE hPrevInstance,LPSTR lpszAr
     mainW = CreateWindowEx(
         0,
         className,                      //Tipo de la ventana
-        L"Concecionario De Autos",      //Titulo de la ventana
+        L"Generar Arbol Binario",      //Titulo de la ventana
         WS_OVERLAPPEDWINDOW|WS_BORDER, 
         200,30,                         //Posicion 'x' y 'y' de la ventana  
         1000,700,                       //Tamaño de la ventana en 'x' y 'y'    
@@ -77,18 +77,24 @@ LRESULT CALLBACK WindowProcedure(HWND mainWindow,UINT messageW,WPARAM wParam,LPA
             break;
 
         case WM_CREATE:
+            wSize.x = 1000;
+            wSize.y = 700;
             initComponents(mainWindow);
             break;
 
         case WM_COMMAND:
             if(LOWORD(BTNgenerar) == wParam)generarButtonAction(mainWindow,4);
-            else if(LOWORD(RBTNinOrder) == wParam)inOrderRbuttonAction();
-            else if(LOWORD(RBTNpostOrder) == wParam)preOrderRbuttonAction();
-            else if(LOWORD(RBTNpreOrder) == wParam)postOrderRbtnAction();
+            else if(LOWORD(RBTNinOrder) == wParam)inOrderRbuttonAction(wParam,mainWindow);
+            else if(LOWORD(RBTNpostOrder) == wParam)postOrderRbtnAction(wParam,mainWindow);
+            else if(LOWORD(RBTNpreOrder) == wParam)preOrderRbuttonAction(wParam,mainWindow);
             break;
     
+        case WM_SIZE:
+            wSize.x = LOWORD(lParam);
+            wSize.y = HIWORD(lParam)-80;
+            resizeWindow();
+            break;
         default:  
-
             return DefWindowProc (mainWindow, messageW, wParam, lParam);
     }
 }

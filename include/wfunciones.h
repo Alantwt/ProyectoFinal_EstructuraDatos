@@ -4,6 +4,12 @@
 #include <windows.h>
 #include <windef.h>
 #include <winuser.h>
+#include <wingdi.h>
+#include <iostream>
+#include <stdio.h>
+#include <string.h>
+
+using namespace std;
 
 //MACROS DE LOS BOTONES
 #define BTNgenerar 100
@@ -16,18 +22,29 @@ struct XY{
     int x;
     int y;
 };
+struct binaryTsimulacion{
+    int info;
+    int heigth;
+}secuenciaPrueba[5];
+
 
 //DECLARACION DE FUNCIONES
 LRESULT CALLBACK WindowProcedure(HWND mainWindow,UINT messageW,WPARAM wParam,LPARAM lParam) ;
 void initComponents(HWND masterWindow);
+void resizeWindow();
 void generarButtonAction(HWND masterWindow);
-void inOrderRbuttonAction();
-void preOrderRbuttonAction();
-void postOrderRbtnAction();
+void inOrderRbuttonAction(WPARAM wParam,HWND mainWindow);
+void preOrderRbuttonAction(WPARAM wParam,HWND mainWindow);
+void postOrderRbtnAction(WPARAM wParam,HWND mainWindow);
+int splitStringBy(const wchar_t* string);
+void painBinaryTree(HWND masterWindow);
+
+void initBTSimulacion();
 
 //DECLARACION DE VARIABLES
 //Ventana principal
 HWND mainW;
+XY wSize;
 //Mensajes de la ventana principal
 MSG msgW;       
 //Estilos de la ventana principal
@@ -35,15 +52,22 @@ WNDCLASSEX wClass;
 wchar_t className[] = L"Estilos"; 
 //Entrada de datos del usuaio
 HWND lblUserInput,wUserInput;
+wchar_t userInput[100];
+int* sequence;
+int lenSequense;
+//Buttons
+HWND btnGenerar;
 //RadioButtons
 HWND rbtnInOrder,rbtnPreOrder,rbtnPostOrder;
-char orderOption[10];
+char orderOption[10] = "inorder";
 //Panel del Arbol binario
 HWND panelBinaryTree, lblElement;
-XY elementSize;
-int lastPositionX;
+XY elementSize,lastPositionElement;
+int lastPositionX, initPositionX;
+wchar_t text[10];
 //Elementos del Arbol Binario
 int binaryTreeWeight = 1;
+
 
 
 
