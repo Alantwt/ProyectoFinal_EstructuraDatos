@@ -25,26 +25,32 @@ struct XY{
 struct binaryTsimulacion{
     int info;
     int heigth;
-}secuenciaPrueba[5];
+    int father;
+    XY fPosition;
+}secuenciaPrueba[10];
 
 
 //DECLARACION DE FUNCIONES
 LRESULT CALLBACK WindowProcedure(HWND mainWindow,UINT messageW,WPARAM wParam,LPARAM lParam) ;
 void initComponents(HWND masterWindow);
+void BinaryTreePanelCreate(HWND masterWindow);
 void resizeWindow();
+void resetWindow();
 void generarButtonAction(HWND masterWindow);
 void inOrderRbuttonAction(WPARAM wParam,HWND mainWindow);
 void preOrderRbuttonAction(WPARAM wParam,HWND mainWindow);
 void postOrderRbtnAction(WPARAM wParam,HWND mainWindow);
 int splitStringBy(const wchar_t* string);
-void painBinaryTree(HWND masterWindow);
+void paintBinaryTree(HWND masterWindow,int lenSequence);
+void paintBinaryTreeConections(HWND masterWindow);
 
 void initBTSimulacion();
+int buscarIndice(int nodo);
 
 //DECLARACION DE VARIABLES
 //Ventana principal
 HWND mainW;
-XY wSize;
+static XY wSize;
 //Mensajes de la ventana principal
 MSG msgW;       
 //Estilos de la ventana principal
@@ -61,12 +67,18 @@ HWND btnGenerar;
 HWND rbtnInOrder,rbtnPreOrder,rbtnPostOrder;
 char orderOption[10] = "inorder";
 //Panel del Arbol binario
-HWND panelBinaryTree, lblElement;
 XY elementSize,lastPositionElement;
 int lastPositionX, initPositionX;
 wchar_t text[10];
 //Elementos del Arbol Binario
 int binaryTreeWeight = 1;
+//Elementos para pintar el arbol binario
+HWND panelBinaryTree, lblElement;
+HDC hDC;
+PAINTSTRUCT ps;
+XY nodoSize, nodoPosition, lastPosition;
+int initXposition,nodoHeigth;
+wchar_t nodoText[10];
 
 
 

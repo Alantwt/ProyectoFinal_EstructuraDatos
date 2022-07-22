@@ -1,0 +1,5 @@
+Para el compilador de gcc para windows se debe especificar que
+que es una aplicacion para windows entonces al compilar desde la linea
+de comandos para c++ se pone: g++ archivo.cpp -o -mwindows archivo.exe
+esto se hace por que el compilador gcc esta predefinido a compilar para
+la terminal y no para aplicaciones de windows 

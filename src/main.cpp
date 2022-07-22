@@ -51,7 +51,6 @@ int WINAPI WinMain (HINSTANCE hThisInstance,HINSTANCE hPrevInstance,LPSTR lpszAr
 
         //Traduce mensajes virtual-key 
         TranslateMessage(&msgW);
-
         //Envia mensajes a WindowProcedure 
         DispatchMessage(&msgW);
 
@@ -64,7 +63,6 @@ int WINAPI WinMain (HINSTANCE hThisInstance,HINSTANCE hPrevInstance,LPSTR lpszAr
 }
 
 LRESULT CALLBACK WindowProcedure(HWND mainWindow,UINT messageW,WPARAM wParam,LPARAM lParam){
-
     //GESTION DE MENSAJES
     switch (messageW)
     {
@@ -83,7 +81,7 @@ LRESULT CALLBACK WindowProcedure(HWND mainWindow,UINT messageW,WPARAM wParam,LPA
             break;
 
         case WM_COMMAND:
-            if(LOWORD(BTNgenerar) == wParam)generarButtonAction(mainWindow,4);
+            if(LOWORD(BTNgenerar) == wParam)generarButtonAction(mainWindow);
             else if(LOWORD(RBTNinOrder) == wParam)inOrderRbuttonAction(wParam,mainWindow);
             else if(LOWORD(RBTNpostOrder) == wParam)postOrderRbtnAction(wParam,mainWindow);
             else if(LOWORD(RBTNpreOrder) == wParam)preOrderRbuttonAction(wParam,mainWindow);
@@ -94,6 +92,9 @@ LRESULT CALLBACK WindowProcedure(HWND mainWindow,UINT messageW,WPARAM wParam,LPA
             wSize.y = HIWORD(lParam)-80;
             resizeWindow();
             break;
+
+        case WM_PAINT:
+            paintBinaryTreeConections();
         default:  
             return DefWindowProc (mainWindow, messageW, wParam, lParam);
     }
