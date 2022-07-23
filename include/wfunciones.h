@@ -58,14 +58,14 @@ WNDCLASSEX wClass;
 wchar_t className[] = L"Estilos"; 
 //Entrada de datos del usuaio
 HWND lblUserInput,wUserInput;
-wchar_t userInput[100];
+wchar_t userInput[200];
 int* sequence;
 int lenSequense;
 //Buttons
 HWND btnGenerar;
 //RadioButtons
 HWND rbtnInOrder,rbtnPreOrder,rbtnPostOrder;
-char orderOption[10] = "inorder";
+char orderOption[10] = "postorder";
 //Panel del Arbol binario
 XY elementSize,lastPositionElement;
 int lastPositionX, initPositionX;

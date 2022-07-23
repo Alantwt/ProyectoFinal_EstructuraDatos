@@ -26,10 +26,10 @@ void generarButtonAction(HWND masterWindow){
     printf("iniciar: %d-%d\n",wSize.x,wSize.y);
     //BinaryTreePanelCreate(masterWindow);
     panelBinaryTree = CreateWindowEx(0,L"static",NULL,WS_VISIBLE|WS_CHILD|WS_BORDER,0,80,wSize.x,wSize.y,masterWindow,NULL,NULL,NULL);
-    GetWindowTextW(wUserInput,userInput,100);
-    lenSequense = splitStringBy(userInput,',',&sequence);
+    GetWindowTextW(wUserInput,userInput,200);
+    lenSequense = splitStringBy(L"12,16,18,10,13,19,15,17,2,6",',',&sequence);
     printf("%dlen\n",lenSequense);
-    //BinaryTreeGenerate(&sequence,lenSequense,orderOption);
+    BinaryTreeGenerate(&sequence,lenSequense,orderOption);
     paintBinaryTree(panelBinaryTree,lenSequense);
     puts(orderOption);
 }
@@ -88,6 +88,7 @@ void paintBinaryTree(HWND masterWindow, int lenSequence){
     //Definir la posicion inicial del primer nodo en X
     initXposition = 300;
     //formula para saber la posicion en y del nodo: (altura * (2*tamaño del rectangulo del nodo)+altura del nodo)
+    printf("\nAltura buscada: %d\n",BinaryTreeSrchHeightOf(12));
     nodoPosition.y =  (secuenciaPrueba[0].heigth*(2*nodoSize.y))+secuenciaPrueba[0].heigth;
     nodoPosition.x = initXposition;
     lastPosition = nodoPosition;
@@ -109,28 +110,28 @@ void paintBinaryTree(HWND masterWindow, int lenSequence){
         secuenciaPrueba[i].fPosition = nodoPosition;
     }
 
-    printf("posiciones guardadas");
-    for(int i = 0; i <= lenSequence-1; i++){
-        printf("%d-%d\n",secuenciaPrueba[i].fPosition.x,secuenciaPrueba[i].fPosition.y);
-    }
+    // printf("posiciones guardadas");
+    // for(int i = 0; i <= lenSequence-1; i++){
+    //     printf("%d-%d\n",secuenciaPrueba[i].fPosition.x,secuenciaPrueba[i].fPosition.y);
+    // }
 
 }
 
-void paintBinaryTreeConections(){
-    hDC = BeginPaint(panelBinaryTree,&ps);
-    for(int i = 0; i <= 10-1; i++){
-        int j = buscarIndice(secuenciaPrueba[i].father);
-        if(j != -1){
-            printf("%d-%d/%d-%d/%d/%d\n",secuenciaPrueba[i].fPosition.x,secuenciaPrueba[i].fPosition.y,secuenciaPrueba[j].fPosition.x,secuenciaPrueba[j].fPosition.y,j,secuenciaPrueba[i].father);
+// void paintBinaryTreeConections(){
+//     hDC = BeginPaint(panelBinaryTree,&ps);
+//     for(int i = 0; i <= 10-1; i++){
+//         int j = buscarIndice(secuenciaPrueba[i].father);
+//         if(j != -1){
+//             printf("%d-%d/%d-%d/%d/%d\n",secuenciaPrueba[i].fPosition.x,secuenciaPrueba[i].fPosition.y,secuenciaPrueba[j].fPosition.x,secuenciaPrueba[j].fPosition.y,j,secuenciaPrueba[i].father);
             
-            MoveToEx(hDC,secuenciaPrueba[i].fPosition.x+15,secuenciaPrueba[i].fPosition.y+15,NULL);
-            int j = buscarIndice(secuenciaPrueba[i].father);
-            LineTo(hDC,secuenciaPrueba[j].fPosition.x+15,secuenciaPrueba[j].fPosition.y+15); 
+//             MoveToEx(hDC,secuenciaPrueba[i].fPosition.x+15,secuenciaPrueba[i].fPosition.y+15,NULL);
+//             int j = buscarIndice(secuenciaPrueba[i].father);
+//             LineTo(hDC,secuenciaPrueba[j].fPosition.x+15,secuenciaPrueba[j].fPosition.y+15); 
             
-        }
-    }
-    EndPaint(panelBinaryTree,&ps);
-}
+//         }
+//     }
+//     EndPaint(panelBinaryTree,&ps);
+// }
 
 int buscarIndice(int nodo){
     printf("buscar\n");

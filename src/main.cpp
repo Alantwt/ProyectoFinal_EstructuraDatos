@@ -94,7 +94,7 @@ LRESULT CALLBACK WindowProcedure(HWND mainWindow,UINT messageW,WPARAM wParam,LPA
             break;
 
         case WM_PAINT:
-            paintBinaryTreeConections();
+            //paintBinaryTreeConections();
         default:  
             return DefWindowProc (mainWindow, messageW, wParam, lParam);
     }
