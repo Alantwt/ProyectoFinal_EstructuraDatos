@@ -20,6 +20,20 @@ void BinaryTreePanelCreate(HWND masterWindow){
     panelBinaryTree = CreateWindowEx(0,L"static",NULL,WS_VISIBLE|WS_CHILD|WS_BORDER,0,80,wSize.x,wSize.y,masterWindow,NULL,NULL,NULL);
 }
 
+void inOrderScreen(HWND masterWindow){
+    const wchar_t* cadenaAux[10]; 
+    const wchar_t* textOrder = (wchar_t*)calloc((2*lenSequence),sizeof(wchar_t)); 
+    for(int i = 0; i <= lenSequence-1; i++){
+
+    }   
+}
+void preOrderScreen(HWND masterWindow){
+
+}
+void postOrderScreen(HWND masterWindow){
+
+}
+
 //ACCION DE LOS BOTONES
 void generarButtonAction(HWND masterWindow){
     resetWindow();
@@ -33,14 +47,32 @@ void generarButtonAction(HWND masterWindow){
     for(int i = 0; i <= lenSequence-1; i++){
         for(int j = i+1; j <= lenSequence-1; j++){
             if(*(sequence+i) == *(sequence+j)){
-                printf("iguales %d-%d/%d-%d\n",i,j,*(sequence +j),*(sequence+(j+1)));
-                *(sequence +j) = *(sequence+(j+1));
+                printf("iguales %d-%d/n%d-%d\n",i,j,*(sequence+i), *(sequence+j));
+                *(sequence +j) = 0;
+                printf("secuencia: %d\n",*(sequence+j));
             }
             else{
-                printf("diferentes %d-%d\n",i,j);
+                printf("diferentes %d-%d/n%d-%d\n",i,j,*(sequence+i), *(sequence+j));
             }
         }
     }
+    for(int i = 0; i <= lenSequence-1; i++){
+        printf("\nsequence %d : %d\n",i,*(sequence+i));
+    }
+    int c = 0;
+    for(int i = 0; i <= lenSequence-1; i++){
+        c = i;
+        while((*(sequence+i) == 0) && c < lenSequence){
+            u++;
+            c++;
+            for(int j = i; j <= lenSequence-1; j++){
+                *(sequence+j) = *(sequence+(j+1));
+                printf("S: %d\n",*(sequence));
+            }
+        }
+        
+    }
+    lenSequence = lenSequence-u;
     for(int i = 0; i <= lenSequence-1; i++){
         printf("\nsequence %d : %d",i,*(sequence+i));
     }
