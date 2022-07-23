@@ -27,7 +27,7 @@ struct binaryTsimulacion{
     int heigth;
     int father;
     XY fPosition;
-}secuenciaPrueba[10];
+};
 
 
 //DECLARACION DE FUNCIONES
@@ -43,9 +43,8 @@ void postOrderRbtnAction(WPARAM wParam,HWND mainWindow);
 int splitStringBy(const wchar_t* string);
 void paintBinaryTree(HWND masterWindow,int lenSequence);
 void paintBinaryTreeConections(HWND masterWindow);
+int searchIndex(int nodo);
 
-void initBTSimulacion();
-int buscarIndice(int nodo);
 
 //DECLARACION DE VARIABLES
 //Ventana principal
@@ -58,9 +57,9 @@ WNDCLASSEX wClass;
 wchar_t className[] = L"Estilos"; 
 //Entrada de datos del usuaio
 HWND lblUserInput,wUserInput;
-wchar_t userInput[200];
+wchar_t userInput[600];
 int* sequence;
-int lenSequense;
+int lenSequence;
 //Buttons
 HWND btnGenerar;
 //RadioButtons
@@ -76,9 +75,11 @@ int binaryTreeWeight = 1;
 HWND panelBinaryTree, lblElement;
 HDC hDC;
 PAINTSTRUCT ps;
-XY nodoSize, nodoPosition, lastPosition;
+XY nodoSize, nodoPosition, lastPosition,*nodosPositions;
 int initXposition,nodoHeigth;
 wchar_t nodoText[10];
+int wNodoHeigth = 0;
+int wFatherElement = 0;
 
 
 

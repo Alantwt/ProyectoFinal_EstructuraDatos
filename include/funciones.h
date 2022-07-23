@@ -22,10 +22,14 @@ void BinaryTreeGenerate(int** sequence, int lenSequence, char* option);
 int BinaryTreeSrchHeightOf(int element);
 void srchHeigth(BinaryTree** nodo, int element);
 int BinaryTreeSrchFather(int element);
+void srchFather(BinaryTree** nodo, int element);
 void BinaryTreeFill(BinaryTree** nodo, BinaryTree** father, int element, int** sequence);
+void BinaryTreeDelete(BinaryTree** nodo);
 // int BinaryTreePreorden(int** sequence, int lenSequence, char* option);
-// int BinaryTreeInorden(int** sequence, int lenSequence, char* option);
-int BinaryTreePostorden(int** sequence, int lenSequence);
+void BinaryTreeInorden(int** sequence, int lenSequence);
+void inOrden(BinaryTree** nodo, int** sequence);
+int BinaryTreePostorden(int** sequence, int* lenSequence);
+void srcHeigth(BinaryTree** nodo, int element);
 
 //ARBOL BINARIO
 BinaryTree* arbolBinario;
@@ -36,6 +40,12 @@ static int** BTsequence;
 static int BTlenSequence;
 static int counterHeigth = 0, heigthFound = 0;
 bool nodoFound = false;
+//INORDER POSTORDER PREORDER
+static int counterInOrder = 0;
+int* orderSecuencia;
+//BUSCAR PADRE
+int fatherElement;
+bool fatherFound = false;
 
 
 #include "../lib/funciones.cpp"
