@@ -2,12 +2,12 @@
 
 //SE ENCARGA DE GENERAR EL ARBOL BINARIO CON EL INPUT DEL USUARIO 
 void BinaryTreeGenerate(int** sequence, int lenSequence, char* option){
+    BinaryTreeDelete(&arbolBinario);
     //Dar espacio en memoria para el array de post, in, pre, order
     orderSecuencia = (int*)calloc(lenSequence,sizeof(int));
     
     // printf("\n___________________________________________________________\n");
     // printf("\nGenerar Arbol\n");
-    BinaryTreeDelete(&arbolBinario);
     BTsequence = sequence;
     BTlenSequence = lenSequence;
     iSequence = 0;
@@ -25,10 +25,10 @@ void BinaryTreeGenerate(int** sequence, int lenSequence, char* option){
     // else if(strcmp(option,"postorder")){
     //     BinaryTreeInorden( sequence,  lenSequence, option);
     // }
-    printf("\n......................................................\n");
-    if(strcmp(option,"postorder") == 0){
-        BinaryTreePostorden(sequence,  lenSequence);
-    }
+    // printf("\n......................................................\n");
+    // if(strcmp(option,"postorder") == 0){
+    //     BinaryTreePostorden(sequence,  lenSequence);
+    // }
 }
 
 //FUNCION PARA BUSCAR ALTURA DE UN ELEMENTO, USA EL PROCESO RECURSIVO DE ABAJO
@@ -195,9 +195,15 @@ void BinaryTreeDelete(BinaryTree** nodo){
 //RECORRIDO INORDER
 void BinaryTreeInorden(int** sequence, int* lenSequence){
     counterInOrder = 0;
-    // printf("\n___________________________________________________________\n");
-    // printf("\nInOrder\n");
+    printf("\n___________________________________________________________\n");
+    printf("\nInOrder\n");
+    for(int i = 0; i <= *lenSequence-1;i++){
+        printf(" io: %d ",*((*sequence+i)));
+    }
     inOrden(&arbolBinario,sequence);
+    for(int i = 0; i <= *lenSequence-1;i++){
+        printf(" io: %d ",*((*sequence+i)));
+    }
     printf("\nIn Order fin\n");
     printf("\n___________________________________________________________\n");
 }
@@ -218,33 +224,30 @@ void inOrden(BinaryTree** nodo,int** sequence){
 }
 
 void BinaryTreePostorden(int** sequence, int lenSequence){
-        counterPostOrder = 0;
-        printf("\n___________________________________________________________\n");
-        printf("\nPostOrder\n");
-        postOrden(&arbolBinario,sequence);
-        printf("\nPost Order fin\n");
-        printf("\n___________________________________________________________\n");
+        // counterPostOrder = 0;
+        // printf("\n___________________________________________________________\n");
+        // printf("\nPostOrder\n");
+        // postOrden(&arbolBinario,sequence);
+        // printf("\nPost Order fin\n");
+        // printf("\n___________________________________________________________\n");
 }
 void postOrden(BinaryTree** nodo, int**sequence){
-    int i;
-    if(*nodo != NULL){
-        if(counterHeigth == BTlenSequence)  
-        return; 
-        if((*nodo)->izquierdo != NULL){
-            postOrden(&(*nodo)->izquierdo,sequence); 
-        }
-        if((*nodo)->derecho != NULL){
-            postOrden(&(*nodo)->derecho,sequence); 
-        }
-        *(*sequence+counterPostOrder) = (*nodo)->info; 
-        counterPostOrder++; 
-        printf("\nPO:%d-%d\n",(*nodo)->info,counterPostOrder);  
-       *(orderSecuencia+i) =  (*nodo)->info;  
-       i++;  
-         
-
-
-    }
+    
+    // if(*nodo != NULL){
+    //     if(counterHeigth == BTlenSequence)  
+    //     return; 
+    //     if((*nodo)->izquierdo != NULL){
+    //         postOrden(&(*nodo)->izquierdo,sequence); 
+    //     }
+    //     if((*nodo)->derecho != NULL){
+    //         postOrden(&(*nodo)->derecho,sequence); 
+    //     }
+    //     *(*sequence+counterPostOrder) = (*nodo)->info; 
+    //     counterPostOrder++; 
+    //     printf("\nPO:%d-%d\n",(*nodo)->info,counterPostOrder);  
+    //    *(orderSecuencia+counterPostOrder) = (*nodo)->info; 
+    //      counterPostOrder++;
+    // }
 }
 void BinaryTreePreorden(int** sequence, int lenSequence){
     counterPreOrder = 0;
@@ -267,6 +270,8 @@ void preOrden(BinaryTree** nodo, int**sequence){
             preOrden(&(*nodo)->derecho,sequence);
         }
     }
+     *(orderSecuencia+counterPreOrder) = (*nodo)->info;
+         counterPreOrder++;
 }
 
 

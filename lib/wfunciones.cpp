@@ -20,23 +20,24 @@ void BinaryTreePanelCreate(HWND masterWindow){
     panelBinaryTree = CreateWindowEx(0,L"static",NULL,WS_VISIBLE|WS_CHILD|WS_BORDER,0,80,wSize.x,wSize.y,masterWindow,NULL,NULL,NULL);
 }
 
-void inOrderScreen(HWND masterWindow){
-    const wchar_t* cadenaAux[10]; 
-    const wchar_t* textOrder = (wchar_t*)calloc((2*lenSequence),sizeof(wchar_t)); 
-    for(int i = 0; i <= lenSequence-1; i++){
+// void inOrderScreen(HWND masterWindow){
+//     const wchar_t* cadenaAux[10]; 
+//     const wchar_t* textOrder = (wchar_t*)calloc((2*lenSequence),sizeof(wchar_t)); 
+//     for(int i = 0; i <= lenSequence-1; i++){
 
-    }   
-}
-void preOrderScreen(HWND masterWindow){
+//     }   
+// }
+// void preOrderScreen(HWND masterWindow){
 
-}
-void postOrderScreen(HWND masterWindow){
+// }
+// void postOrderScreen(HWND masterWindow){
 
-}
+// }
 
 //ACCION DE LOS BOTONES
 void generarButtonAction(HWND masterWindow){
     resetWindow();
+    printf("Entra\n");
     //printf("iniciar: %d-%d\n",wSize.x,wSize.y);
     panelBinaryTree = CreateWindowEx(0,L"static",NULL,WS_VISIBLE|WS_CHILD|WS_BORDER,0,100,wSize.x,wSize.y,masterWindow,NULL,NULL,NULL);
     GetWindowTextW(wUserInput,userInput,600);
@@ -123,7 +124,13 @@ void resetWindow(){
 
 //GENERAR EL ARBOL
 void paintBinaryTree(HWND masterWindow, int lenSequence){
+    for(int i = 0; i <= lenSequence-1; i++){
+        printf(" s: %d ",*(sequence+i));
+    }
     BinaryTreeInorden(&sequence,&lenSequence);
+    for(int i = 0; i <= lenSequence-1; i++){
+        printf(" s: %d ",*(sequence+i));
+    }
     nodosPositions = (XY*)calloc(lenSequence,sizeof(XY));
     //initBTSimulacion();
     //Predefinir el tamaño de cada elemento del arbol binario
@@ -172,8 +179,8 @@ void paintBinaryTreeConections(){
             j = searchIndex(fatherElement);
             if(j != -1){
                 printf("%d-%d/%d-%d\n",(nodosPositions+i)->x,(nodosPositions+i)->y,(nodosPositions+j)->x,(nodosPositions+i)->y);
-                //MoveToEx(hDC,(nodosPositions+i)->x+nodoSize.x/2,(nodosPositions+i)->y+nodoSize.y/2,NULL);
-                //LineTo(hDC,(nodosPositions+j)->x+nodoSize.x/2, (nodosPositions+j)->y+nodoSize.y/2);
+                MoveToEx(hDC,(nodosPositions+i)->x+nodoSize.x/2,(nodosPositions+i)->y+nodoSize.y/2,NULL);
+                LineTo(hDC,(nodosPositions+j)->x+nodoSize.x/2, (nodosPositions+j)->y+nodoSize.y/2);
            }
         }
     }
