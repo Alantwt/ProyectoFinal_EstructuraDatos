@@ -79,6 +79,10 @@ void generarButtonAction(HWND masterWindow){
     }
     BinaryTreeGenerate(&sequence,lenSequence,orderOption);
     paintBinaryTree(panelBinaryTree,lenSequence);
+    printf("ordenes\n");
+    for(int i = 0; i <= lenSequence-1; i++){
+        printf("PO: %d \n",(*orderSecuencia+i));
+    }
 }
 
 void inOrderRbuttonAction(WPARAM wParam,HWND mainWindow){
@@ -127,7 +131,7 @@ void paintBinaryTree(HWND masterWindow, int lenSequence){
     for(int i = 0; i <= lenSequence-1; i++){
         printf(" s: %d ",*(sequence+i));
     }
-    BinaryTreeInorden(&sequence,&lenSequence);
+    BinaryTreeInorden(&sequence,lenSequence);
     for(int i = 0; i <= lenSequence-1; i++){
         printf(" s: %d ",*(sequence+i));
     }
@@ -179,8 +183,8 @@ void paintBinaryTreeConections(){
             j = searchIndex(fatherElement);
             if(j != -1){
                 printf("%d-%d/%d-%d\n",(nodosPositions+i)->x,(nodosPositions+i)->y,(nodosPositions+j)->x,(nodosPositions+i)->y);
-                MoveToEx(hDC,(nodosPositions+i)->x+nodoSize.x/2,(nodosPositions+i)->y+nodoSize.y/2,NULL);
-                LineTo(hDC,(nodosPositions+j)->x+nodoSize.x/2, (nodosPositions+j)->y+nodoSize.y/2);
+                //MoveToEx(hDC,(nodosPositions+i)->x+nodoSize.x/2,(nodosPositions+i)->y+nodoSize.y/2,NULL);
+                //LineTo(hDC,(nodosPositions+j)->x+nodoSize.x/2, (nodosPositions+j)->y+nodoSize.y/2);
            }
         }
     }

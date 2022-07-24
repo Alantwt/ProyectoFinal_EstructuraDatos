@@ -34,10 +34,17 @@ void inOrden(BinaryTree** nodo, int** sequence);
 void BinaryTreePostorden(int** sequence, int lenSequence);
 void preOrden(BinaryTree** nodo, int** sequence);
 /////////////////////////////////////////////////////
-//void BinaryTreePreorden(int** sequence, int lenSequence);
+void BinaryTreePreorden(int** sequence, int lenSequence);
 void postOrden(BinaryTree** nodo, int** sequence);
  
+//
 void srcHeigth(BinaryTree** nodo, int element);
+//insertar nodo
+void BinaryTreeInsertNodo();
+//borrar nodo
+void BinaryTreeDeleteNodo();
+//nodos hoja
+void BinaryTreeChilNodo();
 
 //ARBOL BINARIO
 BinaryTree* arbolBinario;
