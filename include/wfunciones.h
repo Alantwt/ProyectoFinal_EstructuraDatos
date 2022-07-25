@@ -16,6 +16,11 @@ using namespace std;
 #define RBTNinOrder 101
 #define RBTNpostOrder 102
 #define RBTNpreOrder 103
+#define BTNinsertar 104
+#define BTNborrar 105
+#define BTNmostrarHijos 106
+#define BTNmostrarPadres 107
+#define BTNbuscarNodo 108
 
 //DECLARACION DE STRUCTS
 struct XY{
@@ -47,6 +52,12 @@ int splitStringBy(const wchar_t* string);
 void paintBinaryTree(HWND masterWindow,int lenSequence);
 void paintBinaryTreeConections(HWND masterWindow);
 int searchIndex(int nodo);
+void insertarButtonAction(HWND masterWindow);
+void borrarButtonAction(HWND masterWindow);
+void mostrarHijosButtonAction(HWND masterWindow);
+void mostrarPadreButtonAction(HWND masterWindow);
+void buscarNodoButtonAction(HWND masterWindow);
+bool verificarRepetidos();
 
 
 //DECLARACION DE VARIABLES
@@ -59,15 +70,16 @@ MSG msgW;
 WNDCLASSEX wClass;   
 wchar_t className[] = L"Estilos"; 
 //Entrada de datos del usuaio
-HWND lblUserInput,wUserInput;
-wchar_t userInput[600];
+HWND lblUserInput,wUserInput,wUserInputBB;
+wchar_t userInput[600], userInputBB[10];
 int* sequence;
-int lenSequence;
+int* insertSequence;
+int lenSequence = 0;
 //Buttons
-HWND btnGenerar;
+HWND btnGenerar, btnInsertar, btnBorrar, btnMostrarHijos, btnMostrarPadres, btnBuscarNodo;
 //RadioButtons
 HWND rbtnInOrder,rbtnPreOrder,rbtnPostOrder;
-char orderOption[10] = "postorder";
+char orderOption[10] = "inorder";
 //Panel del Arbol binario
 XY elementSize,lastPositionElement;
 int lastPositionX, initPositionX;
@@ -83,7 +95,11 @@ int initXposition,nodoHeigth;
 wchar_t nodoText[10];
 int wNodoHeigth = 0;
 int wFatherElement = 0;
-
+//InOrder/PreOrder/PostOrder Screen
+HWND lblOrder;
+//NodosHijos/NodosPadres
+HWND panelNodosPH;
+HWND lblNodosPH;
 
 
 

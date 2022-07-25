@@ -2,11 +2,11 @@
 
 //SE ENCARGA DE GENERAR EL ARBOL BINARIO CON EL INPUT DEL USUARIO 
 void BinaryTreeGenerate(int** sequence, int lenSequence, char* option){
+    nodosPH = (int*)calloc(1,sizeof(int));
+    lenNodosPH = 0;
     BinaryTreeDelete(&arbolBinario);
     //Dar espacio en memoria para el array de post, in, pre, order
     orderSecuencia = (int*)calloc(lenSequence,sizeof(int));
-    
-    // printf("\n___________________________________________________________\n");
     // printf("\nGenerar Arbol\n");
     BTsequence = sequence;
     BTlenSequence = lenSequence;
@@ -14,19 +14,16 @@ void BinaryTreeGenerate(int** sequence, int lenSequence, char* option){
     BinaryTree* father = NULL;
     //BUCLE PARA ITERAR TODOS LOS ELEMENTOS DEL SEQUENCE QUE ES UN ARRAY DE ENTEROS 
     for(iSequence = 0; iSequence <= lenSequence-1; iSequence++){
+        printf("\nnodo:%d\n",*((*sequence)+iSequence));
         BinaryTreeFill(&arbolBinario,&father,*((*sequence)+iSequence), sequence);
     }
-    // printf("\nGenerar Arbol Fin\n");
-    // printf("\n___________________________________________________________\n");
 
     if(strcmp(option,"preorder") == 0){
-        printf("......................................");
          BinaryTreePreorden( &orderSecuencia, lenSequence);
     }
     if(strcmp(option,"postorder") == 0){
         BinaryTreeInorden(&orderSecuencia,lenSequence);
     }
-    printf("\n......................................................\n");
     if(strcmp(option,"postorder") == 0){
         BinaryTreePostorden(&orderSecuencia,lenSequence);
     }
@@ -34,19 +31,9 @@ void BinaryTreeGenerate(int** sequence, int lenSequence, char* option){
 
 //FUNCION PARA BUSCAR ALTURA DE UN ELEMENTO, USA EL PROCESO RECURSIVO DE ABAJO
 int BinaryTreeSrchHeightOf(int element){
-    // printf("\n___________________________________________________________\n");
-    // printf("\nBuscar Altura\n");
     counterHeigth = 0;
     nodoFound = false;
-    // for(int i = 0; i <= BTlenSequence-1; i++){
-    //     printf("arbol binario: %d",*((*BTsequence)+i));
-    // }
     srcHeigth(&arbolBinario,element);
-    // if(nodoFound == true)return heigthFound;
-    // else return 0;
-    // printf("**%d**",heigthFound);
-    // printf("\nBuscar Altura fin\n");
-    // printf("\n___________________________________________________________\n");
     return heigthFound;
 }
 
@@ -54,9 +41,7 @@ int BinaryTreeSrchHeightOf(int element){
 void srchHeigth(BinaryTree** nodo, int element){
     //CADA VEZ QUE ENTRE A ESTA FUNCION SE AUMENTA EN 1 PARA SIMULAR LA ALTURA DEL NODO
     counterHeigth++;
-    printf("\nH:%d, E: %d, e: %d, xd: %d\n",counterHeigth,(*nodo)->info, element,arbolBinario->info);
     if(element == (*nodo)->info){
-        printf("es igual H: %d\n",counterHeigth);
         //SI ENCUENTRA EL VALOR PEDIDO SE ESTABLECE EN LA VARIABLE UN TRUE INDICANDO QUE YA SE ENCONTRO
         nodoFound = true;
         //SE ALMACENA LA ALTURA EN UNA VARIABLE 
@@ -64,7 +49,6 @@ void srchHeigth(BinaryTree** nodo, int element){
         return;
     }else if (nodoFound == false){
         //SOLO ENTRA AQUI SI SE ESTABLECE QUE EL NODO PEDIDO POR EL USUARIO NO SE AH ENCONTRADO
-        printf("no es igual\n");
         if((*nodo)->izquierdo != NULL){
             //SE VA A LA ISQUIERDA
             //printf("va a la parte izquierda, E: %d\n",(*nodo)->info);
@@ -87,7 +71,6 @@ void srcHeigth(BinaryTree** nodo, int element){
     counterHeigth++;
     if(*(nodo) != NULL){
         if(element == (*nodo)->info){
-           printf("Encontrado element: %d, H:%d\n",(*nodo)->info,counterHeigth); 
            heigthFound = counterHeigth;
         }
         if((*nodo)->izquierdo != NULL){
@@ -108,7 +91,6 @@ int BinaryTreeSrchFather(int element){
     srchFather(&arbolBinario, element);
     // printf("\nBuscar Padre Fin\n");
     // printf("\n___________________________________________________________\n");
-    printf("\nFather: %d E: %d\n",fatherElement,element);
     if(fatherFound == true)return fatherElement;
     else return 0;
 }
@@ -116,8 +98,6 @@ int BinaryTreeSrchFather(int element){
 void srchFather(BinaryTree** nodo, int element){
     
     if(*nodo != NULL && fatherFound == false){
-        printf("\nentra\n");
-        printf("\nf: %d- e: %d",(*nodo)->info,element);
         if((*nodo)->izquierdo != NULL){
             if((*nodo)->izquierdo->info == element){
                 fatherFound = true;
@@ -141,14 +121,11 @@ void srchFather(BinaryTree** nodo, int element){
 
 //FUNCION PARA LLENAR EL ARBOL BINARIO CON EL INPUT DEL USUARIO, ES UN PROCESO RECURSIVO
 void BinaryTreeFill(BinaryTree** nodo, BinaryTree** father, int element, int** sequence){
-    // printf("\n___________________________________________________________\n");
-    // printf("\nLLenar Arbol\n");
     if(*nodo == NULL){
         *nodo = (BinaryTree*)calloc(1,sizeof(BinaryTree));
         (*nodo)->info = element;
         (*nodo)->derecho = NULL;
         (*nodo)->izquierdo = NULL;
-        //cout<<*nodo<<endl;
 
         if(*father != NULL){
             if(element > (*father)->info){
@@ -174,8 +151,6 @@ void BinaryTreeFill(BinaryTree** nodo, BinaryTree** father, int element, int** s
             BinaryTreeFill(&(*nodo)->izquierdo, &*nodo, element, sequence);
         }
     }
-    // printf("\nLLenar Arbol Fin\n");
-    // printf("\n___________________________________________________________\n");
 }
 
 //BORRAR ARBOL BINARIO
@@ -196,17 +171,7 @@ void BinaryTreeDelete(BinaryTree** nodo){
 //RECORRIDO INORDER
 void BinaryTreeInorden(int** sequence, int lenSequence){
     counterInOrder = 0;
-    printf("\n___________________________________________________________\n");
-    printf("\nInOrder\n");
-    for(int i = 0; i <= lenSequence-1;i++){
-        printf(" io: %d ",*((*sequence+i)));
-    }
     inOrden(&arbolBinario,sequence);
-    for(int i = 0; i <= lenSequence-1;i++){
-        printf(" io: %d ",*((*sequence+i)));
-    }
-    printf("\nIn Order fin\n");
-    printf("\n___________________________________________________________\n");
 }
 
 void inOrden(BinaryTree** nodo,int** sequence){
@@ -216,9 +181,7 @@ void inOrden(BinaryTree** nodo,int** sequence){
             inOrden(&(*nodo)->izquierdo, sequence);
         }
         *(*sequence+counterInOrder) = (*nodo)->info;
-        *(orderSecuencia+counterInOrder) = (*nodo)->info;
         counterInOrder++;
-        printf("\nIO:%d-%d\n",(*nodo)->info,counterInOrder);
         if((*nodo)->derecho != NULL){
             inOrden(&(*nodo)->derecho,sequence);
         }
@@ -227,11 +190,7 @@ void inOrden(BinaryTree** nodo,int** sequence){
 
 void BinaryTreePostorden(int** sequence, int lenSequence){
         counterPostOrder = 0;
-        printf("\n___________________________________________________________\n");
-        printf("\nPostOrder\n");
         postOrden(&arbolBinario,sequence);
-        printf("\nPost Order fin\n");
-        printf("\n___________________________________________________________\n");
 }
 void postOrden(BinaryTree** nodo, int**sequence){
     
@@ -244,27 +203,19 @@ void postOrden(BinaryTree** nodo, int**sequence){
         if((*nodo)->derecho != NULL){
             postOrden(&(*nodo)->derecho,sequence); 
         }
-        *(*sequence+counterPostOrder) = (*nodo)->info; 
-        counterPostOrder++; 
-        printf("\nPO:%d-%d\n",(*nodo)->info,counterPostOrder);  
        *(orderSecuencia+counterPostOrder) = (*nodo)->info; 
          counterPostOrder++;
     }
 }
 void BinaryTreePreorden(int** sequence, int lenSequence){
     counterPreOrder = 0;
-    printf("\n___________________________________________________________\n");
-    printf("\nPreOrder\n");
     preOrden(&arbolBinario,sequence); 
-    printf("\nPre Order fin\n");
-    printf("\n___________________________________________________________\n");
 }
 void preOrden(BinaryTree** nodo, int**sequence){
     if(*nodo != NULL){
         if(counterHeigth == BTlenSequence)return;
-        *(*sequence+counterPreOrder) = (*nodo)->info;
+        *(orderSecuencia+counterPreOrder) = (*nodo)->info;
         counterPreOrder++;
-        printf("\nPOO:%d-%d\n",(*nodo)->info,counterPreOrder);
         if((*nodo)->izquierdo != NULL){
             preOrden(&(*nodo)->izquierdo,sequence);
         }
@@ -272,8 +223,70 @@ void preOrden(BinaryTree** nodo, int**sequence){
             preOrden(&(*nodo)->derecho,sequence);
         }
     }
-     *(orderSecuencia+counterPreOrder) = (*nodo)->info;
-         counterPreOrder++;
+}
+
+int BinaryTreeSrchAllFather(int** sequence, int lenSequence){
+    int j = 0;
+    int f = 0;
+    for(int i = 0; i <= lenSequence-1; i++){
+        f = BinaryTreeSrchFather(*(*sequence+i));
+        if(f != 0){
+            *(nodosPH+j) = f;
+            printf("\nentra %d-%d\n",f,*(*sequence+i));
+            j++;
+            nodosPH = (int*)realloc(nodosPH,(j+1)*sizeof(int));
+        }
+    }
+    return j;
+}
+
+int BinaryTreeSrchLeafs(){
+    lenNodosLeaf = 0;
+    srchLeafs(&arbolBinario);
+    return lenNodosLeaf;
+}
+
+void srchLeafs(BinaryTree** nodo){
+    if(((*nodo)->izquierdo == NULL)&&((*nodo)->derecho == NULL)){
+        *(nodosPH+lenNodosLeaf) = (*nodo)->info;
+        lenNodosLeaf++;
+        nodosPH = (int*)realloc(nodosPH,(lenNodosLeaf+1)*sizeof(int));
+    }
+    if((*nodo)->izquierdo != NULL){
+        srchLeafs(&(*nodo)->izquierdo);
+    }
+    if((*nodo)->derecho != NULL){
+        srchLeafs(&(*nodo)->derecho);
+    }
+}
+
+int BinaryTreeSrchNodo(int element){
+    nodoEncontrado = false;
+    lenNodos = 0;
+    srchNodo(&arbolBinario,element);
+    if(nodoEncontrado == true)return lenNodos;
+    else return 0;
+}
+
+void srchNodo(BinaryTree** nodo, int element){
+    if((*nodo)->info == element){
+        nodoEncontrado = true;
+        *(nodosPH+lenNodos) = (*nodo)->info;
+        lenNodos++;
+        nodosPH = (int*)realloc(nodosPH,(lenNodos)*sizeof(int));
+    }
+    if(nodoEncontrado == false){
+        printf("nodo: %d ",(*nodo)->info);
+        *(nodosPH+lenNodos) = (*nodo)->info;
+        lenNodos++;
+        nodosPH = (int*)realloc(nodosPH,(lenNodos+1)*sizeof(int));
+        if((element < (*nodo)->info)&&((*nodo)->izquierdo != NULL)){
+            srchNodo(&(*nodo)->izquierdo,element);
+        }
+        if((element > (*nodo)->info)&&((*nodo)->derecho != NULL)){
+            srchNodo(&(*nodo)->derecho,element);
+        }
+    }
 }
 
 

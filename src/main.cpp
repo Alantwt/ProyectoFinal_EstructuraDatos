@@ -32,7 +32,7 @@ int WINAPI WinMain (HINSTANCE hThisInstance,HINSTANCE hPrevInstance,LPSTR lpszAr
         L"Generar Arbol Binario",      //Titulo de la ventana
         WS_OVERLAPPEDWINDOW|WS_BORDER, 
         200,30,                         //Posicion 'x' y 'y' de la ventana  
-        1000,700,                       //Tamaño de la ventana en 'x' y 'y'    
+        1130,700,                       //Tamaño de la ventana en 'x' y 'y'    
         HWND_DESKTOP,                   //Ventana Padre
         NULL,                           //Sin Menu
         hThisInstance,                  
@@ -75,7 +75,7 @@ LRESULT CALLBACK WindowProcedure(HWND mainWindow,UINT messageW,WPARAM wParam,LPA
             break;
 
         case WM_CREATE:
-            wSize.x = 1000;
+            wSize.x = 1130;
             wSize.y = 700;
             initComponents(mainWindow);
             break;
@@ -85,6 +85,11 @@ LRESULT CALLBACK WindowProcedure(HWND mainWindow,UINT messageW,WPARAM wParam,LPA
             else if(LOWORD(RBTNinOrder) == wParam)inOrderRbuttonAction(wParam,mainWindow);
             else if(LOWORD(RBTNpostOrder) == wParam)postOrderRbtnAction(wParam,mainWindow);
             else if(LOWORD(RBTNpreOrder) == wParam)preOrderRbuttonAction(wParam,mainWindow);
+            else if(LOWORD(BTNinsertar) == wParam)insertarButtonAction(mainWindow);
+            else if(LOWORD(BTNborrar) == wParam)borrarButtonAction(mainWindow);
+            else if(LOWORD(BTNmostrarHijos) == wParam)mostrarHijosButtonAction(mainWindow);
+            else if(LOWORD(BTNmostrarPadres) == wParam)mostrarPadreButtonAction(mainWindow);
+            else if(LOWORD(BTNbuscarNodo == wParam)) buscarNodoButtonAction(mainWindow);
             break;
     
         case WM_SIZE:

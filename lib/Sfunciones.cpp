@@ -33,4 +33,3 @@ int splitStringBy(wchar_t* stringS,char symbol,int** list){
     return i;
 
 }
-//[4][1][2]

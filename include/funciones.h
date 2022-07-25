@@ -24,6 +24,11 @@ int BinaryTreeSrchHeightOf(int element);
 void srchHeigth(BinaryTree** nodo, int element);
 int BinaryTreeSrchFather(int element);
 void srchFather(BinaryTree** nodo, int element);
+int BinaryTreeSrchLeafs();
+void srchLeafs(BinaryTree** nodo);
+int BinaryTreeSrchNodo(int element);
+void srchNodo(BinaryTree** nodo, int element);
+int BinaryTreeSrchAllFather(int** sequence, int lenSequence);
 void BinaryTreeFill(BinaryTree** nodo, BinaryTree** father, int element, int** sequence);
 void BinaryTreeDelete(BinaryTree** nodo);
 // int BinaryTreePreorden(int** sequence, int lenSequence, char* option);
@@ -39,8 +44,6 @@ void postOrden(BinaryTree** nodo, int** sequence);
  
 //
 void srcHeigth(BinaryTree** nodo, int element);
-//insertar nodo
-void BinaryTreeInsertNodo();
 //borrar nodo
 void BinaryTreeDeleteNodo();
 //nodos hoja
@@ -58,9 +61,17 @@ bool nodoFound = false;
 //INORDER POSTORDER PREORDER
 static int counterInOrder = 0, counterPostOrder = 0, counterPreOrder = 0;
 int* orderSecuencia;
+
 //BUSCAR PADRE
 int fatherElement;
 bool fatherFound = false;
+//NodosPadre/NodosHoja
+int* nodosPH;
+int lenNodosPH = 0;
+int lenNodosLeaf = 0;
+//Buscar un Nodo
+static bool nodoEncontrado;
+int lenNodos = 0;
 
 
 #include "../lib/funciones.cpp"
