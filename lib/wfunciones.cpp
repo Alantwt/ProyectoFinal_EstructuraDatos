@@ -33,13 +33,13 @@ void BinaryTreePanelCreate(HWND masterWindow){
 void inOrderScreen(HWND masterWindow){
     wchar_t cadenaAux[10];
     int inicial = 10;
-    lblOrder = CreateWindowEx(0,L"static",L"InOrder",WS_VISIBLE|WS_CHILD,10,5,50,20,masterWindow,NULL,NULL,NULL);
+    lblOrder = CreateWindowEx(0,L"static",L"InOrder",WS_VISIBLE|WS_CHILD,inicial,5,50,20,masterWindow,NULL,NULL,NULL);
     swprintf(cadenaAux,L"%d,",*(sequence+0)); 
-    lblOrder = CreateWindowEx(0,L"static",cadenaAux,WS_VISIBLE|WS_CHILD,inicial,30,15,20,masterWindow,NULL,NULL,NULL);
+    lblOrder = CreateWindowEx(0,L"static",cadenaAux,WS_VISIBLE|WS_CHILD,inicial,20,20,20,masterWindow,NULL,NULL,NULL);
     for(int i = 1; i <= lenSequence-1; i++){
         inicial = inicial+20+wcslen(cadenaAux);
         swprintf(cadenaAux,L"%d,",*(sequence+i));
-        lblOrder = CreateWindowEx(0,L"static",cadenaAux,WS_VISIBLE|WS_CHILD,inicial,30,15,20,masterWindow,NULL,NULL,NULL);
+        lblOrder = CreateWindowEx(0,L"static",cadenaAux,WS_VISIBLE|WS_CHILD,inicial,20,15,20,masterWindow,NULL,NULL,NULL);
     }  
     lblOrder = CreateWindowEx(0,L"static",L"Peso:",WS_VISIBLE|WS_CHILD,10,120,50,20,masterWindow,NULL,NULL,NULL);
     swprintf(cadenaAux,L"%d",lenSequence);
@@ -50,11 +50,11 @@ void preOrderScreen(HWND masterWindow){
     int inicial = 10;
     lblOrder = CreateWindowEx(0,L"static",L"PreOrder",WS_VISIBLE|WS_CHILD,inicial,5,70,20,masterWindow,NULL,NULL,NULL);
     swprintf(cadenaAux,L"%d,",*(orderSecuencia+0)); 
-    lblOrder = CreateWindowEx(0,L"static",cadenaAux,WS_VISIBLE|WS_CHILD,10,15,20,20,masterWindow,NULL,NULL,NULL);
+    lblOrder = CreateWindowEx(0,L"static",cadenaAux,WS_VISIBLE|WS_CHILD,10,20,20,20,masterWindow,NULL,NULL,NULL);
     for(int i = 1; i <= lenSequence-1; i++){
         inicial = inicial+20+wcslen(cadenaAux);
         swprintf(cadenaAux,L"%d,",*(orderSecuencia+i));
-        lblOrder = CreateWindowEx(0,L"static",cadenaAux,WS_VISIBLE|WS_CHILD,inicial,15,20,20,masterWindow,NULL,NULL,NULL);
+        lblOrder = CreateWindowEx(0,L"static",cadenaAux,WS_VISIBLE|WS_CHILD,inicial,20,20,20,masterWindow,NULL,NULL,NULL);
     }  
     lblOrder = CreateWindowEx(0,L"static",L"Peso:",WS_VISIBLE|WS_CHILD,10,120,50,20,masterWindow,NULL,NULL,NULL);
     swprintf(cadenaAux,L"%d",lenSequence);
@@ -63,13 +63,13 @@ void preOrderScreen(HWND masterWindow){
 void postOrderScreen(HWND masterWindow){
     wchar_t cadenaAux[10];
     int inicial = 10;
-    lblOrder = CreateWindowEx(0,L"static",L"PostOrder",WS_VISIBLE|WS_CHILD,inicial,10,80,20,masterWindow,NULL,NULL,NULL);
+    lblOrder = CreateWindowEx(0,L"static",L"PostOrder",WS_VISIBLE|WS_CHILD,inicial,5,80,20,masterWindow,NULL,NULL,NULL);
     swprintf(cadenaAux,L"%d,",*(orderSecuencia+0)); 
-    lblOrder = CreateWindowEx(0,L"static",cadenaAux,WS_VISIBLE|WS_CHILD,10,15,20,20,masterWindow,NULL,NULL,NULL);
+    lblOrder = CreateWindowEx(0,L"static",cadenaAux,WS_VISIBLE|WS_CHILD,10,20,20,20,masterWindow,NULL,NULL,NULL);
     for(int i = 1; i <= lenSequence-1; i++){
         inicial = inicial+20+wcslen(cadenaAux);
         swprintf(cadenaAux,L"%d,",*(orderSecuencia+i));
-        lblOrder = CreateWindowEx(0,L"static",cadenaAux,WS_VISIBLE|WS_CHILD,inicial,15,20,20,masterWindow,NULL,NULL,NULL);
+        lblOrder = CreateWindowEx(0,L"static",cadenaAux,WS_VISIBLE|WS_CHILD,inicial,20,20,20,masterWindow,NULL,NULL,NULL);
     }  
     lblOrder = CreateWindowEx(0,L"static",L"Peso:",WS_VISIBLE|WS_CHILD,10,120,50,20,masterWindow,NULL,NULL,NULL);
     swprintf(cadenaAux,L"%d",lenSequence);
@@ -82,7 +82,7 @@ void generarButtonAction(HWND masterWindow){
     //printf("iniciar: %d-%d\n",wSize.x,wSize.y);
     panelBinaryTree = CreateWindowEx(0,L"static",NULL,WS_VISIBLE|WS_CHILD|WS_BORDER,0,100,wSize.x,wSize.y,masterWindow,NULL,NULL,NULL);
     GetWindowTextW(wUserInput,userInput,600);
-    if(wcslen(userInput) > 0){
+    if((wcslen(userInput) > 0)&&(wcscmp(userInput,L"0") == 1)){
         lenSequence = splitStringBy(userInput,',',&sequence);
         if(lenSequence > 0){
             //VERIFICAR NUMEROS REPETIDOS Y ELIMINARLOS
@@ -253,10 +253,32 @@ void borrarButtonAction(HWND masterWindow){
                 *(insertSequence+i) = 0;
             }
         }
+
+        int u = 0;
+        for(int i = 0; i <= lenSequence-1; i++){
+            for(int j = i+1; j <= lenSequence-1; j++){
+                if(*(insertSequence+i) == *(insertSequence+j)){
+                    *(insertSequence+j) = 0;
+                }
+            }
+        }
+        int c = 0;
+        for(int i = 0; i <= lenSequence-1; i++){
+            c = i;
+            if(*(insertSequence+i) == 0){
+                c++;
+                for(int j = i; j <= lenSequence-1; j++){
+                    *(insertSequence+j) = *(insertSequence+(j+1));
+                }
+            }
+            
+        }
+        lenSequence = lenSequence-1;
+        sequence = (int*)realloc(sequence,lenSequence*sizeof(int));
+
         for(int i = 0; i <= lenSequence-1; i++){
             *(sequence+i) = *(insertSequence+i);
         }
-        verificarRepetidos();
         insertSequence = (int*)realloc(insertSequence,lenSequence*sizeof(int));
         for(int i = 0; i <= lenSequence-1;i++){
             *(insertSequence+i) = *(sequence+i);
@@ -311,8 +333,7 @@ void mostrarPadreButtonAction(HWND masterWindow){
                 for(int j = i; j <= lenNodosPadre-1; j++){
                     *(nodosPH+j) = *(nodosPH+(j+1));
                 }
-            }
-            
+            }  
         }
         lenNodosPadre = lenNodosPadre-u;
         nodosPH = (int*)realloc(nodosPH,lenNodosPadre*sizeof(int));
